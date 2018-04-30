@@ -22,12 +22,114 @@ struct TreapNode* newNode(int key) {
 }
 
 struct TreapNode* search(struct TreapNode* root, int val) {
-    // your implementation goes here
+    struct TreapNode * p = root;
+    while (p!=NULL){
+    	if (val == p->val){
+    		return p;
+		}
+    	else if (val>p->val){
+    		p=p->right;
+		}
+		else{
+			p=p->left;
+		}
+	}
+	return p;
 }
 
 struct TreapNode* insert(struct TreapNode* root, int val) {
-   // your implementation goes here
+    struct TreapNode * new_node = newNode(val);
+    struct TreapNode * p = root;
+    struct TreapNode * q = root;
+    if (root==NULL){
+    	root=new_node;
+    	return root;
+	}
+	/*binary tree insertion*/
+    while (p!=NULL){
+    	if (val>p->val){
+    		q=p;
+    		p=p->right;
+		}
+		else{
+			q=p;
+			p=p->left;
+		}
+	}
+	if (val>p->val){
+		q->right = new_node;
+	}
+	else{
+		q->left = new_node;
+	}
+	/*fix priority order*/
+	if (neq_node->priority>q->priority){
+		if (q->left ==new_node){
+			rightRotate(root,new_node);
+		}
+		else{
+			leftRotate(root;new_node);
+		}
+	}
+	
+	
+	
 }
+
+void rightRotate(struct TreapNode*root, struct TreapNode*x){
+	struct TreapNode *p,*g,*b;
+	b=root;
+	g=NULL;
+    p=NULL;
+	while (b->val !=x->val){
+		if (x->val >b){
+			g=p;
+			p=b;
+			b=b->right;
+		}
+		else{
+			g=p;
+			p=b;
+			b=b->left;
+		}
+	}
+	b=x->right;
+	x->right =p;
+	p->left = b
+	if (p->val>g->val){
+		g->right = x;
+	}
+	else{
+		g->left = x;
+	}
+}
+
+void leftRotate(struct TreapNode*root, struct TreapNode*x){
+	struct TreapNode *p,*g,*b;
+	b=root;
+	g=NULL;
+    p=NULL;
+	while (b->val !=x->val){
+		g=p;
+		p=b;
+		if (x->val >b){
+			b=b->right;
+		}
+		else{
+			b=b->left;
+		}
+	}
+	b=x->left;
+	x->left = p;
+	p->right = b
+	if (p->val>g->val){
+		g->right = x;
+	}
+	else{
+		g->left = x;
+	}
+}
+
 
 struct TreapNode* deleteNode(struct TreapNode* root, int val) {
    // your implementation goes here
